@@ -1,0 +1,13 @@
+#board .div {
+  display: inline-block;
+  padding: 20px;
+  margin: 5px;
+}
+h3 {
+  display: inline-block;
+  margin: 0;
+}
+
+.crossed {
+  background-color: red;
+}
