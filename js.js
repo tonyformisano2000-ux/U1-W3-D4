@@ -9,53 +9,36 @@ for (let x = 0; x < 90; x++) {
   div.appendChild(h3);
   div.classList.add("div");
   caselle[x] = div;
-  casellen[x] = Number(h3);
-  if (x === 9 || 19 || 29 || 39 || 49 || 59 || 69 || 79 || 89) {
-    table.appendChild(accapo);
-  }
+  casellen[x] = Number(h3.innerText);
   table.appendChild(div);
 }
 
 const Lancio = function (e) {
   const risultato = Math.round(Math.random() * 99);
   console.log("è uscito", risultato);
-  if (casellen[risultato] != risultato) {
+  console.log(casellen[risultato - 1]);
+  if (casellen[risultato - 1] != risultato) {
+    console.log(risultato, "è già uscito.");
+    Lancio();
+    console.log(risultato, "è già uscito.");
   } else {
-    casellen.splice(x, 1);
-    caselle.splice(x, 1);
+    casellen[risultato - 1] = 100;
+    caselle[risultato - 1] = 100;
   }
+  console.log(caselle);
+  console.log(casellen);
   check(risultato);
 };
 
 const check = function (x) {
-  //   console.log("questo è il valore di x=", x);
-  //   caselle.forEach((y) => {
-  //     const info = y.querySelector("h3");
-  //     const num = Number(info.innerText);
-  //     if (x === num) {
-  //       console.log("corrispondenza trovata");
-  //       let makeItRed = caselle[x].querySelector("div");
-  //       console.log(makeItRed);
-  // //       makeItRed.classList.add("crossed");
-  //     }
-  //   });
-};
-
-const numberGen = () => {
-  const button = document.getElementById("numGen");
-
-  button.addEventListener("click", () => {
-    if (numPool.length === 0) return;
-
-    const numRandom = Math.floor(Math.random() * numPool.length);
-
-    const pickedElement = numPool[numRandom];
-    numPool.splice(numRandom, 1);
-
-    console.log(numPool.length);
-
-    pickedElement.classList.add("colorcell");
+  caselle.forEach((y) => {
+    const info = y.querySelector("h3");
+    const num = Number(info.innerText);
+    if (x === num) {
+      console.log("corrispondenza trovata");
+      let makeItRed = caselle[x].querySelector("div");
+      console.log(makeItRed);
+      //   makeItRed.classList.add("crossed");
+    }
   });
 };
-
-numberGen();
