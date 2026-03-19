@@ -17,10 +17,15 @@ const Lancio = function (e) {
   const risultato = Math.round(Math.random() * 99);
   console.log("è uscito", risultato);
   console.log(casellen[risultato - 1]);
-  if (casellen[risultato - 1] != risultato) {
+  let endGame = 0;
+  casellen.forEach((n) => {
+    endGame += n;
+  });
+  if (endGame === 9000) {
+    endGame = 0;
+  } else if (casellen[risultato - 1] != risultato) {
     console.log(risultato, "è già uscito.");
     Lancio();
-    console.log(risultato, "è già uscito.");
   } else {
     casellen[risultato - 1] = 100;
     caselle[risultato - 1] = 100;
@@ -31,14 +36,11 @@ const Lancio = function (e) {
 };
 
 const check = function (x) {
-  caselle.forEach((y) => {
-    const info = y.querySelector("h3");
-    const num = Number(info.innerText);
-    if (x === num) {
-      console.log("corrispondenza trovata");
-      let makeItRed = caselle[x].querySelector("div");
-      console.log(makeItRed);
-      //   makeItRed.classList.add("crossed");
+  const info = document.querySelectorAll(".div h3");
+  for (i = 0; i < info.length; i++) {
+    if (Number(info[i].innerText) === x) {
+      const cell = info[i].parentElement;
+      cell.classList.add("crossed");
     }
-  });
+  }
 };
